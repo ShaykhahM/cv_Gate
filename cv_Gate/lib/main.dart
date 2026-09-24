@@ -6,20 +6,31 @@ import 'package:cv_gate/screens/splash/Splash_Screen.dart';
 
 import 'package:cv_gate/shared/services/local/Cahs_Helper.dart';
 import 'package:cv_gate/test_screen.dart';
+import 'package:cv_gate/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 
-Future<void> main()async {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Future.wait<void>([
-    Firebase.initializeApp(),
-    CashHelper.initPreference(),
-  ]);
+  try {
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
+  } catch (e) {
+    debugPrint('Firebase initialization notice: $e');
+  }
+
+  try {
+    await CashHelper.initPreference();
+  } catch (e) {
+    debugPrint('CashHelper initialization notice: $e');
+  }
+
   Widget widget;
-  var userTypeIndex =CashHelper.getCash(key: 'userIndex');
+  var userTypeIndex = CashHelper.getCash(key: 'userIndex');
 
   // tempId=CashHelper.getCash(key: 'token');
   //

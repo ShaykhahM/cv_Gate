@@ -15,58 +15,32 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-# Miscellaneous
-*.class
-*.log
-*.pyc
-*.swp
-*.bak
-*~
-.DS_Store
-.atom/
-.buildlog/
-.history
-.svn/
-migrate_working_dir/
-
-# IntelliJ / Android Studio related
-*.iml
-*.ipr
-*.iws
-.idea/
-
-# VS Code
-.vscode/
-
-# Flutter/Dart/Pub related
-**/doc/api/
-**/ios/Flutter/.last_build_id
+# Flutter / Dart
 .dart_tool/
 .flutter-plugins
 .flutter-plugins-dependencies
+.packages
 .pub-cache/
 .pub/
-/build/
+build/
 **/build/
+**/doc/api/
 
-# Symbolication & Obfuscation
-app.*.symbols
-app.*.map.json
-
-# Android build artifacts and temp files
-/android/app/debug
-/android/app/profile
-/android/app/release
+# Android build outputs & caches
 **/android/.gradle/
 **/android/local.properties
 **/android/key.properties
+**/android/app/debug/
+**/android/app/profile/
+**/android/app/release/
 **/android/captures/
 **/android/app/build/
 *.keystore
 *.jks
 .gradle/
 
-# iOS / macOS build artifacts and temp files
+# iOS / macOS build outputs & caches
+**/ios/Flutter/.last_build_id
 **/ios/Flutter/ephemeral/
 **/ios/Pods/
 **/ios/.symlinks/
@@ -83,3 +57,18 @@ app.*.map.json
 ._*
 .Spotlight-V100
 .Trashes
+
+# IDE & Editor files
+.idea/
+*.iml
+*.iws
+*.ipr
+.vscode/
+
+# Logs and temporary files
+*.log
+*.class
+*.pyc
+*.swp
+*.bak
+*~
