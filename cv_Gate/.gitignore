@@ -83,3 +83,4 @@ app.*.map.json
 ._*
 .Spotlight-V100
 .Trashes
+lib/firebase_options.dart
