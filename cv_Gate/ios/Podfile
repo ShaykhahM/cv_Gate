@@ -1,5 +1,4 @@
-# Uncomment this line to define a global platform for your project
-# platform :ios, '15.0'
+platform :ios, '15.0'
 
 # CocoaPods analytics sends network stats synchronously affecting flutter build latency.
 ENV['COCOAPODS_DISABLE_STATS'] = 'true'
@@ -39,5 +38,23 @@ end
 post_install do |installer|
   installer.pods_project.targets.each do |target|
     flutter_additional_ios_build_settings(target)
+    target.build_configurations.each do |config|
+      config.build_settings['EXCLUDED_ARCHS[sdk=iphonesimulator*]'] = 'x86_64'
+      xcconfig_path = config.base_configuration_reference.real_path rescue nil
+      if xcconfig_path && File.exist?(xcconfig_path)
+        xcconfig = File.read(xcconfig_path)
+        xcconfig_mod = xcconfig.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR")
+        File.open(xcconfig_path, "w") { |file| file << xcconfig_mod }
+      end
+    end
+  end
+  # Replace DT_TOOLCHAIN_DIR in all generated Pods xcconfigs and scripts
+  Dir.glob("Pods/Target Support Files/**/*.*").each do |file|
+    if File.file?(file)
+      content = File.read(file)
+      if content.include?("DT_TOOLCHAIN_DIR")
+        File.open(file, "w") { |f| f << content.gsub(/DT_TOOLCHAIN_DIR/, "TOOLCHAIN_DIR") }
+      end
+    end
   end
 end
